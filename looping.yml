@@ -1,0 +1,11 @@
+---
+# Looping in the ansible
+- hosts: all
+  tasks:  
+    - name: Creating the multiple files
+      file: dest={{ item }} state=touch owner=root group=root mode=711
+      with_items:
+          - "/tmp/test1"
+          - "/tmp/test2"
+          - "/tmp/test3"
+  

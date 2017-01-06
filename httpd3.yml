@@ -1,0 +1,18 @@
+---
+# Installing httpd using tags
+- hosts: all
+  tasks:
+  - name: Insalling httpd service   
+    yum: name=httpd state=present
+    tags: installhttpd
+  - name: statring httpd service
+    service: name=httpd state=started
+    tags: startinghttpd
+  - name: Copying the configuration file
+    template: src=/etc/ansible/httpd.conf.j2 dest=/etc/httpd/conf/httpd.conf
+    tags: copyingconfig
+    notify: 
+     - restart httpd service
+  handlers:
+  - name: restart httpd service
+    service:  name=httpd state=restarted

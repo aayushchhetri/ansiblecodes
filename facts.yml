@@ -1,0 +1,9 @@
+---
+# pulling the fact valus via tempalte as well as from plays
+- hosts: all
+  tasks:
+    - name: Copying the tempalte which is using the facts
+      template: src=test.conf.j2 dest=/tmp/test.conf
+
+    - name: Adding the line in the file
+      lineinfile: dest=/tmp/test1 line={{  ansible_hostname  }}
